@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>GeoPUCMinas</title>
+    
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="geopucminas/geopucminas.js"></script>
+    <script src="geopucminas/geopucminas.kriging.js"></script>
+
+    <link rel="stylesheet" href="geopucminas/geopucminas.css" />
+    
+    <script src="geopucminas/MG_Geometria.js"></script>
+
+    <style>
+		#mapa1 {
+			width: 600px;
+			height: 530px;
+			border: thin black solid;
+		}
+    </style>
+    
+    <script src="dados.js"></script>
+    
+    <script>
+      function mapa() {
+        var gpm = new GeoPUCMinas('MG');
+        var filtroRegiao = { 'meso': '04' };
+        var opcoesMapa = {
+          'títuloDoMapa': 'População (2010)',
+          'títuloDaLegenda': [ 'Habitantes' ],
+          'títuloNaTabela': [ 'Habitantes' ],
+          'método': 'quebras naturais',
+          'quantidadeDeClasses': 5,
+          'casasDecimais': [0]
+        }
+        
+        gpm.adicionaMapa( 'mapa1', [dados], filtroRegiao, opcoesMapa );
+        gpm.adicionaInterpolação( 'mapa1' );
+      }
+    </script>
+    
+  </head>
+  <body>
+  
+  	<div class="row">
+  	<h1>GeoPUCMinas</h1>
+  	<p><strong>Exemplo 3</strong> - Mapa isoplético para uma determinada mesorregião.</p>
+
+    <div id="mapa1"></div>
+	<button data-geopucminas="opções" data-mapa="mapa1">
+      Opções de apresentação
+    </button>
+    <button data-geopucminas="tabela" data-mapa="mapa1">
+      Tabela de dados
+    </button>
+    <button data-geopucminas="calibragem-kriging" data-mapa="mapa1">
+      Calibragem interpolação
+    </button>
+    </div>
+    
+    
+	<script>
+		window.load = mapa();
+	</script>
+    
+  </body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" >
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>GeoPUCMinas</title>
+
+	<link rel="stylesheet" href="../css/normalize.css">
+	<link rel="stylesheet" href="../css/foundation.css">
+	<script src="../js/vendor/custom.modernizr.js"></script>
+	<style>
+		pre {
+			padding: 1ex;
+			background-color: #f2f2f2;
+			overflow-x: auto;
+		}
+		pre code {
+			color: #000;
+			font-weight: normal;
+		}
+		pre code .destaque {
+			color: #7f0a0c;
+		}
+
+	</style>
+
+</head>
+<body>
+
+<!-- Header and Nav -->
+ 
+ 	<div style="background-color: #085a78">
+		<div class="row">
+			<div class="large-12 columns">
+				<h1 style="margin-bottom: 1ex; margin-top: 1ex; color: white; font-weight: bold">GeoPUCMinas</h1>
+			</div>
+		</div>
+	</div>
+ 
+	<div class="row">
+		<div class="large-3 medium-4 small-12 columns">
+			<div class="panel">
+				<ul class="side-nav">
+				  <li style="margin-bottom:2em"><a href="index.html">Sobre</a></li>
+				  <li class="divider"></li>
+				  <li class="heading">TUTORIAL</li>
+				  <li><a href="t_include.html">Incorporação da biblioteca</a></li>
+				  <li><a href="t_mapa.html">Preparação do mapa</a></li>
+				  <li class="active"><a href="t_controles.html">Inclusão dos controles</a></li>
+				  <li><a href="t_comandos.html">Criação do mapa</a></li>
+				  <li><a href="t_interpolacao.html">Adição da interpolação</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="large-9 medium-8 small-12 columns">
+			<h2 class="subheader" style="margin-top:1ex;">Inclusão dos controles</h2>
+			<p style="margin-top:2em">
+			Caso se deseje que o usuário possa alterar as condições de apresentação
+			do mapa, deve-se incluir um controle para essa alteração. Esse controle é
+			um botão que possui um atributo <code>data-geopucminas</code> com o valor
+			<code>opções</code> e um atributo <code>data-mapa</code> que tem como valor 
+			o identificador do mapa.
+			</p><p>
+			Também é possível criar um controle para a exibição da tabela de dados usada
+			na construção do mapa. Esse controle é um outro botão semelhante ao anterior,
+			mas com o valor <code>tabela</code> no atributo <code>data-geopucminas</code>.
+			</p><p>
+			A formatação desses controles é livre e, no exemplo, feita por meio da CSS.
+			</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;title&gt;GeoPUCMinas&lt;/title&gt;
+    
+    &lt;script src="http://code.jquery.com/jquery-1.10.1.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://maps.googleapis.com/maps/api/js?sensor=false"&gt;&lt;/script&gt;
+    &lt;script src="geopucminas/geopucminas.js"&gt;&lt;/script&gt;
+    &lt;link rel="stylesheet" href="geopucminas/geopucminas.css" /&gt;
+    
+    &lt;script src="geopucminas/MG_Geometria.js"&gt;&lt;/script&gt;
+    
+    &lt;style&gt;
+      #mapa1 {
+        width: 600px;
+        height: 530px;
+        border: thin black solid;
+      }
+      <span class="destaque">button { 
+        background: #bbb;
+        color: #000;
+        border: thin #888 solid;
+        font-size: 8pt;
+        font-weight: normal;
+      }</span>
+    &lt;/style&gt;
+    
+  &lt;/head&gt;
+  &lt;body&gt;
+
+    &lt;div id="mapa1"&gt;&lt;/div&gt;
+    <span class="destaque">&lt;button data-geopucminas="opções" data-mapa="mapa1">
+      Opções de apresentação
+    &lt;/button&gt;
+    &lt;button data-geopucminas="tabela" data-mapa="mapa1"&gt;
+      Tabela de dados
+    &lt;/button&gt;</span>
+
+    &lt;script src="geopucminas/foundation.min.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+      $(document).foundation();
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+			<p></p>
+			<div class="right">
+			<p><a href="t_comandos.html">Seguinte</a></p>
+			</div>
+		</div>
+	</div>
+
+ 
+  <!-- Footer -->
+ 
+	<footer class="row">
+		<div class="medium-12 columns">
+			<hr />
+			<p style="font-size: 85%;line-height:1.35">
+			<strong>Elaboração:</strong> Prof. Marcos André Silveira Kutova<br/>
+			<strong>Orientação:</strong> Prof. Dr. João Francisco de Abreu<br/>
+			Programa de Pós-graduação <em>Stricto Sensu</em> em Geografia - Tratamento da Informação Espacial<br/>
+			Pontifícia Universidade Católica de Minas Gerais</p>
+			<p style="font-size: 70%;line-height:1.35">&copy; PUC Minas, 2013. Todos os direitos reservados, de acordo com o art. 184 do Código Penal e
+			com a lei 9.610 de 19 de fevereiro de 1998. Proibidas a reprodução, a distribuição, a difusão,
+			a execução pública, a locação e quaisquer outras modalidades de utilização sem a devida autorização
+			da Pontifícia Universidade Católica de Minas Gerais.</p>
+		</div>
+	</footer>
+  
+
+  <script src="../js/vendor/jquery.js"></script>
+  <script src="../js/foundation.min.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
+</body>
+</html>

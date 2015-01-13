@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" >
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>GeoPUCMinas</title>
+
+	<link rel="stylesheet" href="../css/normalize.css">
+	<link rel="stylesheet" href="../css/foundation.css">
+	<script src="../js/vendor/custom.modernizr.js"></script>
+	<style>
+		pre {
+			padding: 1ex;
+			background-color: #f2f2f2;
+			overflow-x: auto;
+		}
+		pre code {
+			color: #000;
+			font-weight: normal;
+		}
+		pre code .destaque {
+			color: #7f0a0c;
+		}
+
+	</style>
+
+</head>
+<body>
+
+<!-- Header and Nav -->
+ 
+ 	<div style="background-color: #085a78">
+		<div class="row">
+			<div class="large-12 columns">
+				<h1 style="margin-bottom: 1ex; margin-top: 1ex; color: white; font-weight: bold">GeoPUCMinas</h1>
+			</div>
+		</div>
+	</div>
+ 
+	<div class="row">
+		<div class="large-3 medium-4 small-12 columns">
+			<div class="panel">
+				<ul class="side-nav">
+				  <li style="margin-bottom:2em"><a href="index.html">Sobre</a></li>
+				  <li class="divider"></li>
+				  <li class="heading">TUTORIAL</li>
+				  <li><a href="t_include.html">Incorporação da biblioteca</a></li>
+				  <li><a href="t_mapa.html">Preparação do mapa</a></li>
+				  <li><a href="t_controles.html">Inclusão dos controles</a></li>
+				  <li class="active"><a href="t_comandos.html">Criação do mapa</a></li>
+				  <li><a href="t_interpolacao.html">Adição da interpolação</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="large-9 medium-8 small-12 columns">
+			<h2 class="subheader" style="margin-top:1ex;">Criação do mapa</h2>
+			<p style="margin-top:2em">
+			A criação do mapa é feita por meio de alguns poucos comandos em JavaScript. 
+			Antes disso, no entanto, é importante a definição de um elemento JSON que 
+			conterá os valores de cada um dos municípios, da seguinte forma:
+			</p>
+<pre><code>var dados = {
+  '310010': 6704,
+  '310020': 22690,
+  '310030': 13311,
+  ...
+};</pre></code>
+			<p></p>
+			<p>
+			Cada item do objeto contém o código do município (de acordo com o IBGE) e o 
+			valor da variável medida para esse município. O objeto JSON pode tanto ser escrito na própria página quanto incorporado
+			por meio de um arquivo auxiliar, como no caso do arquivo <a href="dados.js">dados.js</a>
+			usado no exemplo abaixo. O objeto JSON também pode ser construído dinamicamente
+			a partir de uma consulta a uma base de dados.
+			</p><p>
+			O exemplo abaixo também apresenta a sequência de comandos para a geração do mapa.
+			</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;title&gt;GeoPUCMinas&lt;/title&gt;
+    
+    &lt;script src="http://code.jquery.com/jquery-1.10.1.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://maps.googleapis.com/maps/api/js?sensor=false"&gt;&lt;/script&gt;
+    &lt;script src="geopucminas/geopucminas.js"&gt;&lt;/script&gt;
+    &lt;link rel="stylesheet" href="geopucminas/geopucminas.css" /&gt;
+    
+    &lt;script src="geopucminas/MG_Geometria.js"&gt;&lt;/script&gt;
+
+    &lt;style&gt;
+      #mapa1 {
+        width: 600px;
+        height: 530px;
+        border: thin black solid;
+      }
+      button { 
+        background: #bbb;
+        color: #000;
+        border: thin #888 solid;
+        font-size: 8pt;
+        font-weight: normal;
+      }
+    &lt;/style&gt;
+    
+    <span class="destaque">&lt;script src="dados.js"&gt;&lt;/script&gt;</span>
+    
+    <span class="destaque">&lt;script&gt;
+      function inicializa() {
+        var gpm = new GeoPUCMinas('MG');
+        var filtroRegiao = {};
+        var opcoesMapa = {
+          'títuloDoMapa': 'População (2010)',
+          'títuloDaLegenda': [ 'Habitantes' ],
+          'títuloNaTabela': [ 'Habitantes' ],
+          'método': 'quebras naturais',
+          'quantidadeDeClasses': 5,
+          'casasDecimais': [0]
+        }
+        
+        gpm.adicionaMapa( 'mapa1', [dados], filtroRegiao, opcoesMapa );
+      }
+    &lt;/script&gt;</span>
+    
+  &lt;/head&gt;
+  &lt;body&gt;
+
+    &lt;div id="mapa1"&gt;&lt;/div&gt;
+    &lt;button data-geopucminas="opções" data-mapa="mapa1">
+      Opções de apresentação
+    &lt;/button&gt;
+    &lt;button data-geopucminas="tabela" data-mapa="mapa1"&gt;
+      Tabela de dados
+    &lt;/button&gt;
+
+    &lt;script src="geopucminas/foundation.min.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+      $(document).foundation();
+      <span class="destaque">window.load = inicializa();</span>
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+			<p></p>
+			<p>
+			A primeira observação importante sobre esses comandos é que eles só podem ser
+			executados após a carga completa dos arquivos. Isso é assegurado por meio da
+			inserção dos comandos em uma função de nome <code>inicializa</code>
+			que é invocada por meio da sua atribuição ao método <code>window.load</code>, 
+			no fim do corpo do documento.
+			</p><p>
+			Dentro da função, o primeiro comando cria um objeto da classe <strong>GeoPUCMinas</strong>. O construtor
+			desse objeto requer a identificação do estado que será apresentado. Neste exemplo, foi escolhido o
+			estado MG (que, atualmente, é o único possível).
+			</p><p>
+			O segundo comando, cria um objeto JSON com o filtro de micro ou mesorregião (neste caso o filtro está
+			vazio e todos os municípios do estado serão apresentados. Um filtro de microrregião pode ser criado 
+			da seguinte forma: 
+			</p>
+<pre><code>var filtroRegiao = { 'meso': '06' };</pre></code>
+			<p></p>
+<pre><code>var filtroRegiao = { 'micro': '18' };</pre></code>
+			<p></p>
+			<p>
+			Enquanto o primeiro filtro restringe o mapa à mesorregião Central Mineira, o segundo filtro
+			retringe o mapa à microrregião de Uberlândia. Os valores numéricos representam os códigos
+			das micro e mesorregiões, de acordo com o IBGE.
+			</p><p>
+			O comando seguinte define as opções de apresentação do mapa, que são:
+			</p>
+			<ul>
+			<li><code>títuloDoMapa</code> - Título a ser apresentado no canto esquerdo superior do mapa.</li>
+			<li><code>títuloDaLegenda</code> - Vetor de títulos das variáveis. O título da variável ativa
+			será apresentado na caixa de legenda.</li>
+			<li><code>títuloNaTabela</code> - Vetor de títulos que serão usados para as colunas da tabela de dados.</li>
+			<li><code>método</code> - Método de quebra das classes. Os valores possíveis são "quebras naturais", "amplitude",
+			"quantis" ou "manual".</li>
+			<li><code>quantidadeDeClasses</code> - Número de classes que devem ser apresentadas na legenda.</li>
+			<li><code>casasDecimais</code> - Número de casas decimais, para cada variável, que devem ser apresentadas na legenda.</li>
+			</ul>
+			<p>
+			O último comando chama o método <code>adicionaMapa</code>, que recebe como parâmetros: o identificador
+			do componente que receberá o mapa, um vetor de variáveis (objetos JSON) que contém os valores de cada 
+			município, o filtro de região e as opções de apresentação do mapa.
+			</p>
+
+			
+			
+			<div class="right">
+			<p><a href="t_interpolacao.html">Seguinte</a></p>
+			</div>
+		</div>
+	</div>
+
+ 
+  <!-- Footer -->
+ 
+	<footer class="row">
+		<div class="medium-12 columns">
+			<hr />
+			<p style="font-size: 85%;line-height:1.35">
+			<strong>Elaboração:</strong> Prof. Marcos André Silveira Kutova<br/>
+			<strong>Orientação:</strong> Prof. Dr. João Francisco de Abreu<br/>
+			Programa de Pós-graduação <em>Stricto Sensu</em> em Geografia - Tratamento da Informação Espacial<br/>
+			Pontifícia Universidade Católica de Minas Gerais</p>
+			<p style="font-size: 70%;line-height:1.35">&copy; PUC Minas, 2013. Todos os direitos reservados, de acordo com o art. 184 do Código Penal e
+			com a lei 9.610 de 19 de fevereiro de 1998. Proibidas a reprodução, a distribuição, a difusão,
+			a execução pública, a locação e quaisquer outras modalidades de utilização sem a devida autorização
+			da Pontifícia Universidade Católica de Minas Gerais.</p>
+		</div>
+	</footer>
+  
+
+  <script src="../js/vendor/jquery.js"></script>
+  <script src="../js/foundation.min.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
+</body>
+</html>

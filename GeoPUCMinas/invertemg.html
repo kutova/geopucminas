@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <title>GeoPUCMinas</title>
+    
+    <script src="MG_Geometria.js"></script>
+    
+    <script>
+    function carrega() {
+    
+      s = '<p>';
+      for( var i in geometriaMesos.MG ) {
+        s+='"'+i+'":["'+
+            geometriaMesos.MG[i][0]+'",[[';    // nome
+        p = geometriaMesos.MG[i][1][0];
+        latant = Infinity;
+        lonant = Infinity;
+        for( j=0; j<p.length; j++ ) {
+          lon = Math.round(p[j][0]*10000)/10000;
+          lat = Math.round(p[j][1]*10000)/10000;
+          if( lat!=latant || lon!=lonant ) {
+            s += "["+lat+","+lon+"],";
+            latant = lat;
+            lonant = lon;
+          }
+        }
+        
+        s=s.substr(0,s.length-1)+']]],<br/>';
+      }
+      document.getElementById('divpoly').innerHTML = s;
+    
+    }
+    </script>
+    
+  </head>
+  <body onload="carrega()">
+  
+    <div id="divpoly"></div>
+    
+    
+  </body>
+</html>

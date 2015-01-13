@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>GeoPUCMinas</title>
+    
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="geopucminas/geopucminas.js"></script>
+
+    <link rel="stylesheet" href="geopucminas/geopucminas.css" />
+    
+    <script src="geopucminas/MG_Geometria.js"></script>
+
+    <style>
+		#mapa1 {
+			width: 600px;
+			height: 530px;
+			border: thin black solid;
+		}
+		
+		body {
+			background: #FAFAF6;
+			font-family: Calibri, Arial, Sans-Serif;
+			padding: 1ex 2em;
+		}
+		h1 {
+			font-size: 32pt;
+			margin-bottom: 0;
+			color: #4FACD7;
+		}
+		p.subtitulo {
+			font-size: 16pt;
+			margin-top: 0;
+			color: #000000;
+		}
+			
+			
+   </style>
+    
+    <script src="dados.js"></script>
+    
+    <script>
+      function mapa() {
+        var gpm = new GeoPUCMinas('MG');
+        var filtroRegiao = { };
+        var opcoesMapa = {
+          'títuloDoMapa': 'População (2010)',
+          'títuloDaLegenda': [ 'Habitantes' ],
+          'títuloNaTabela': [ 'Habitantes' ],
+          'método': 'quebras naturais',
+          'quantidadeDeClasses': 5,
+          'casasDecimais': [0],
+          'mapaNoFundo': true
+        }
+        
+        gpm.adicionaMapa( 'mapa1', [dados], filtroRegiao, opcoesMapa );
+      }
+    </script>
+    
+  </head>
+  <body>
+  
+  	<h1>GeoPUCMinas</h1>
+  	<p class="subtitulo"><strong>Exemplo 1</strong> - Mapa coroplético a partir de uma única fonte de dados.</p>
+
+    <div id="mapa1"></div>
+	<button data-geopucminas="opções" data-mapa="mapa1">
+      Opções de apresentação
+    </button>
+    <button data-geopucminas="tabela" data-mapa="mapa1">
+      Tabela de dados
+    </button>    
+    
+	<script>
+		window.load = mapa();
+
+	</script>
+    
+  </body>
+</html>

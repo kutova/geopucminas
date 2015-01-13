@@ -1,0 +1,87 @@
+#infoWindow {
+	font-size: small;
+}
+#infoWindow h4, #infoWindow h4 a {
+	font-size: 110%;
+	font-weight: bold;
+}
+.gpmCaixaTítulo {
+	background-color: #FFF;
+	margin: 10px;
+	min-width: 100px;
+	border: thin black solid;
+	box-shadow: -3px 3px 8px #888;
+}
+.gpmCaixaTítulo p {
+	font-family: 'Arial Narrow', 'Arial', sans-serif;
+	font-weight: bold;
+	font-size: 12pt;
+	margin: 3px;
+	padding: 0px 5px;
+}
+.gpmCaixaLegenda {
+	font-family: 'Arial Narrow', 'Arial', sans-serif;
+	font-size: 10pt;
+	background-color: #FFF;
+	margin: 10px;
+	padding: 5px;
+	border: thin black solid;
+	box-shadow: -3px 3px 8px #888;
+	line-height: 1.25;
+}
+.gpmCaixaLegenda p {
+	/* font-weight: bold; */
+	text-transform: uppercase;
+	margin-top: 3px;
+}
+.gpmCaixaLegenda div {
+	clear: both;
+}
+.gpmCaixaCor {
+	height: 12px;
+	width: 12px;
+	margin-right: 3px;
+	float: left;
+	display: block;
+	border: thin black solid;
+}	
+.gpmEscala {
+	height:7px;
+}
+
+@media print {
+.gpmCaixaTítulo {
+	background-color: #FFF;
+	color: blue;
+	margin: 10px;
+	min-width: 100px;
+	border: thin black solid;
+	box-shadow: -3px 3px 8px #888;
+}
+}
+
+/* Componentes principais */
+#gpmcpcorr th {
+	font-size:small;
+	text-align: center;
+}
+#gpmcps td, #gpmcpcorr td, #escores td, #escores thead th {
+	text-align: right;
+}
+#escores th:first-child {
+	text-align: left;
+}
+#gpmcps tbody th, #escores tbody th {
+	text-align: left;
+}
+#gpmcps th, #gpmcps td, #gpmcpcorr th, #gpmcpcorr td {
+	border:thin black solid;
+}
+#escores {
+	width:100%;
+}
+
+.gpmJanelaModal {
+	background: #fff;
+	padding: 15px 30px;
+}
